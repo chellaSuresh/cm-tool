@@ -11,14 +11,14 @@ var jqgridHandler ={
 			jqgridHandler.exportToGrid();
 		},
 		loadjQGrid : function(data){
-			
+			//JqGrid function
 			var applicationGrid = $("#grid");
 			//var data = [[48803, ++, "02200220", "actType"], [48769, "APPR", "77733337", "acttye"]];
 
 		 jqgridata=	$("#grid").jqGrid({
 			    datatype: "local",
 			    
-			    colNames: ['Document No', 'Document Name', 'UTC Type', 'Arctefact Type'],
+			    colNames: ['Document Type Classification', 'Document Type', 'UTC Type', 'Arctefact Type'],
 			    colModel: [{
 			        name: 'Document_No',
 			        index: 'Document_No',
@@ -45,9 +45,19 @@ var jqgridHandler ={
 			    //width: '100%',
 			    autowidth: true,
 			    caption: "Documents",
-			    // ondblClickRow: function(rowid,iRow,iCol,e){alert('double clicked');}
+			    rowNum:20,
+			   	rowList:[10,20,30],
+			    pager: "#pager",
+			     ondblClickRow: function(rowid,iRow,iCol,e){alert('double clicked');
+			     console.log(e);
+			     console.log(rowid);
+			     console.log(iRow);
+			     console.log(iCol);
+			     
+			     
+			     }
 			});
-	
+		 	//jqGrid responsive code 
 			$(window).on("resize", function () {
    			 var newWidth = $("#grid").closest(".ui-jqgrid").parent().width();
    			 applicationGrid.jqGrid("setGridWidth", newWidth, true);
@@ -55,121 +65,107 @@ var jqgridHandler ={
 			var names = ['Document_No', 'Document_Name', 'UTC_Type', 'Arctefact_Type'];
 			var mydata = [];
 
-			for (var i = 0; i < data.length; i++) {
-			    mydata[i] = {};
-			    for (var j = 0; j < data[i].length; j++) {
-			        mydata[i][names[j]] = data[i][j];
-			    }
-			}
-
-			for (var i = 0; i <= mydata.length; i++) {
-			    $("#grid").jqGrid('addRowData', i + 1, mydata[i]);
-			}
-
-			/*
-			$("#grid").jqGrid('setGridParam', {onSelectRow: function(rowid,iRow,iCol,e){alert('row clicked');}});
-			*/
-			$("#grid").jqGrid('setGridParam', {ondblClickRow: function(rowid,iRow,iCol,e){alert('double clicked');}});
+			//viewing the documents 
 			$(document).off('click').on('click','.node-h6',function(e){
 				//$('.label_node').click(function(e){
 			    	console.log(e.target.innerText);
 			    	$('.data, .exporttoExcel').remove();
+			    	
+			    	//solution json
 			    	 docsJSon=[
-			    	          {
-			    			"docid": "001",
-			    		    "utcCode": "SOL-901",
-			    		    "atcCode": "222.0-",
-			    		    "documentName":"Requirements Specification",
-			    		    "docmentlink": "Administration",
-			    			"priority":"M"
-			    			 },
-			    			 {
+			    	           {
+			    	        	  	"docid": "001",
+			    		    		"utcCode": "SOL-901",
+			    		    		"atcCode": "222.0-",
+			    		    		"documentName":"Requirements Specification",
+			    		    		"docmentlink": "Administration",
+			    					"priority":"M"
+			    	           },
+			    	           {
 			    	    			"docid": "001",
 			    	    		    "utcCode": "SOL-901",
 			    	    		    "atcCode": "222.1-",
 			    	    		    "documentName":"Deployment Guide",
 			    	    		    "docmentlink": "Administration",
 			    	    			"priority":"M"
-			    	    			 },
-			    	    			 {
-			    	    	    			"docid": "001",
-			    	    	    		    "utcCode": "SOL-901",
-			    	    	    		    "atcCode": "223.0",
-			    	    	    		    "documentName":"CM Plan",
-			    	    	    		    "docmentlink": "Administration",
-			    	    	    			"priority":"M"
-			    	    	    			 },
-			    			 {
-			    				 "docid": "001",
+			    	           },
+			    	           {
+			    	    			"docid": "001",
+			    	    		    "utcCode": "SOL-901",
+			    	    		    "atcCode": "223.0",
+			    	    		    "documentName":"CM Plan",
+			    	    		    "docmentlink": "Administration",
+			    	    			"priority":"M"
+			    	           },
+			    	           {
+			    	    	    	"docid": "001",
 			    	    		    "utcCode": "SOL-901",
 			    	    		    "atcCode": "223.1",
 			    	    		    "documentName":"Master Configuration Index",
 			    	    		    "docmentlink": "Administration",
 			    	    			"priority":"M"
-			    			 },
-			    			 {
-			    				 "docid": "001",
+			    	           },
+			    	           {
+			    				 	"docid": "001",
 			    	    		    "utcCode": "SOL-901",
 			    	    		    "atcCode": "223.2",
 			    	    		    "documentName":"Baseline Report",
 			    	    		    "docmentlink": "Administration",
 			    	    			"priority":"M"
-			    			 },
-			    			 {
-			    				 "docid": "001",
+			    	           },
+			    	           {
+			    				 	"docid": "001",
 			    	    		    "utcCode": "SOL-901",
 			    	    		    "atcCode": "222.3",
 			    	    		    "documentName":"Site Engineering Data",
 			    	    		    "docmentlink": "Administration",
 			    	    			"priority":"O"
-			    			 },
-			    			 {
-			    				 "docid": "001",
+			    	           },
+			    	           {
+			    				 	"docid": "001",
 			    	    		    "utcCode": "SOL-901",
 			    	    		    "atcCode": "222.2",
 			    	    		    "documentName":"CustomerQuistioner",
 			    	    		    "docmentlink": "Administration",
 			    	    			"priority":"O"
-			    			 },
-			    			 {
-			    				 "docid": "001",
+			    	           },
+			    	           {
+			    				 	"docid": "001",
 			    	    		    "utcCode": "SOL-901",
 			    	    		    "atcCode": "222.5",
 			    	    		    "documentName":"Site Survey",
 			    	    		    "docmentlink": "Administration",
 			    	    			"priority":"C"
-			    			 },
-			    			 {
-			    				 "docid": "001",
+			    	           },
+			    	           {
+			    				 	"docid": "001",
 			    	    		    "utcCode": "SOL-901",
 			    	    		    "atcCode": "222.6",
 			    	    		    "documentName":"Site installation Reports",
 			    	    		    "docmentlink": "Administration",
 			    	    			"priority":"C"
-			    			 },
-			    			 {
-			    				 "docid": "001",
+			    	           },
+			    	           {
+			    				 	"docid": "001",
 			    	    		    "utcCode": "SOL-901",
 			    	    		    "atcCode": "225.1",
 			    	    		    "documentName":"Migration Plan",
 			    	    		    "docmentlink": "Administration",
 			    	    			"priority":"C"
-			    			 }
-			    			 
-			    			 
-			    			 
-			    		]
+			    	           }
+			    	         ]
+			    	 //projects JSON
 			    	 docsJSon2=[
 			        	          {
-			        			"docid": "001",
-			        		    "utcCode": "PRJ-901",
-			        		    "atcCode": "202-",
-			        		    "documentName":"Investigation Report",
-			        		    "docmentlink": "Administration",
-			        			"priority":"O"
+			        	        	    "docid": "001",
+			        	        	    "utcCode": "PRJ-901",
+			        	        	    "atcCode": "202-",
+			        	        	    "documentName":"Investigation Report",
+			        	        	    "docmentlink": "Administration",
+			        	        	    "priority":"O"
 			        			 },
 			        			 {
-			        				 "docid": "001",
+			        				 	"docid": "001",
 			        	    		    "utcCode": "PRJ-901",
 			        	    		    "atcCode": "206-",
 			        	    		    "documentName":"Resource Plan",
@@ -177,7 +173,7 @@ var jqgridHandler ={
 			        	    			"priority":"M"
 			        			 },
 			        			 {
-			        				 "docid": "001",
+			        				 	"docid": "001",
 			        	    		    "utcCode": "PRJ-901",
 			        	    		    "atcCode": "207-",
 			        	    		    "documentName":"Time Plan",
@@ -185,7 +181,7 @@ var jqgridHandler ={
 			        	    			"priority":"M"
 			        			 },
 			        			 {
-			        				 "docid": "001",
+			        				 	"docid": "001",
 			        	    		    "utcCode": "PRJ-901",
 			        	    		    "atcCode": "208-",
 			        	    		    "documentName":"Purchase Order",
@@ -193,7 +189,7 @@ var jqgridHandler ={
 			        	    			"priority":"M"
 			        			 },
 			        			 {
-			        				 "docid": "001",
+			        				 	"docid": "001",
 			        	    		    "utcCode": "PRJ-901",
 			        	    		    "atcCode": "209-",
 			        	    		    "documentName":"Solution Map",
@@ -201,7 +197,7 @@ var jqgridHandler ={
 			        	    			"priority":"M"
 			        			 },
 			        			 {
-			        				 "docid": "001",
+			        				 	"docid": "001",
 			        	    		    "utcCode": "PRJ-901",
 			        	    		    "atcCode": "201.0-",
 			        	    		    "documentName":"Cost BudgetPlan",
@@ -209,7 +205,7 @@ var jqgridHandler ={
 			        	    			"priority":"M"
 			        			 },
 			        			 {
-			        				 "docid": "001",
+			        				 	"docid": "001",
 			        	    		    "utcCode": "PRJ-901",
 			        	    		    "atcCode": "201.2-",
 			        	    		    "documentName":"Audit Report",
@@ -217,7 +213,7 @@ var jqgridHandler ={
 			        	    			"priority":"O"
 			        			 },
 			        			 {
-			        				 "docid": "001",
+			        				 	"docid": "001",
 			        	    		    "utcCode": "PRJ-901",
 			        	    		    "atcCode": "201.9-",
 			        	    		    "documentName":"Change Request",
@@ -225,7 +221,7 @@ var jqgridHandler ={
 			        	    			"priority":"O"
 			        			 },
 			        			 {
-			        				 "docid": "001",
+			        				 	"docid": "001",
 			        	    		    "utcCode": "PRJ-901",
 			        	    		    "atcCode": "205-",
 			        	    		    "documentName":"Technical Report",
@@ -233,7 +229,7 @@ var jqgridHandler ={
 			        	    			"priority":"O"
 			        			 },
 			        			 {
-			        				 "docid": "001",
+			        				 	"docid": "001",
 			        	    		    "utcCode": "PRJ-901",
 			        	    		    "atcCode": "202.2-",
 			        	    		    "documentName":"Root Cause Analysis",
@@ -241,7 +237,7 @@ var jqgridHandler ={
 			        	    			"priority":"O"
 			        			 },
 			        			 {
-			        				 "docid": "001",
+			        				 	"docid": "001",
 			        	    		    "utcCode": "PRJ-901",
 			        	    		    "atcCode": "202.6-",
 			        	    		    "documentName":"Acceptance Certificate",
@@ -249,7 +245,7 @@ var jqgridHandler ={
 			        	    			"priority":"O"
 			        			 },
 			        		]
-			    	
+			    	//products JSON
 			    	
 			    	 docsJSon3=[
 				        	          {
@@ -329,7 +325,7 @@ var jqgridHandler ={
 			    	
 			    	
 			    	
-			    	
+			    	//checking the priority of the documents and showing them 
 			    	if(e.target.innerText == "SOL-901-001"){
 			    		$.each(docsJSon, function(i, obj){
 			        		if(obj.priority == "M"){
@@ -338,7 +334,7 @@ var jqgridHandler ={
 			            	    $('.docFields').append(html);
 //			            	    var data = [[obj.docid+i,obj.documentName,obj.utcCode,obj.atcCode]];
 //			            	    jqgridHandler.loadjQGrid(data);
-			            	    deleteGridRow(obj);
+			            	    addGridRow(obj);
 			        		}else if(obj.priority == "C"){
 			        	    var html = "<div class='data condition'><br><input type='checkbox' class='docCheckbox'>"	+
 			            	"<div class='docName'>"+obj.documentName+ "</div><div>C</div></div>";
@@ -350,10 +346,7 @@ var jqgridHandler ={
 			        		}
 			        	});
 			    		$('.documents').append("<div class='exporttoExcel'></div>");
-			        	/* $('.docFields').append(
-			        	"<div class='data'><br><input type='checkbox' class='docCheckbox'>"	+
-			        	"<div class='docName'>"+docsJSon[0].utcCode+"-"+docsJSon[0].Reference+ "</div></div>"
-			        	); */
+			        	
 			        	$('.docFields').show();
 			    	}else if(e.target.innerText=="PRJ-901-001"){
 			    		$.each(docsJSon2, function(i, obj){
@@ -363,7 +356,7 @@ var jqgridHandler ={
 			            	    $('.docFields').append(html);
 //			            	    var data = [[obj.docid+i,obj.documentName,obj.utcCode,obj.atcCode]];
 //			            	    jqgridHandler.loadjQGrid(data);
-			            	    deleteGridRow(obj);
+			            	    addGridRow(obj);
 			        		}else if(obj.priority == "C"){
 			        	    var html = "<div class='data condition'><br><input type='checkbox' class='docCheckbox'>"	+
 			            	"<div class='docName'>"+obj.documentName+ "</div><div>C</div></div>";
@@ -389,7 +382,7 @@ var jqgridHandler ={
 			            	    $('.docFields').append(html);
 //			            	    var data = [[obj.docid,obj.documentName,obj.utcCode,obj.atcCode]];
 //			            	    jqgridHandler.loadjQGrid(data);
-			            	    deleteGridRow(obj);
+			            	    addGridRow(obj);
 			        		}else if(obj.priority == "C"){
 			        	    var html = "<div class='data condition'><br><input type='checkbox' class='docCheckbox'>"	+
 			            	"<div class='docName'>"+obj.documentName+ "</div><div>C</div></div>";
@@ -411,7 +404,7 @@ var jqgridHandler ={
 			    });
 			
 			
-			//search 
+			//search operation
 			   $(document).on("keyup","#filter",function(){
 				   	 
 			        // Retrieve the input field text and reset the count to zero
@@ -430,11 +423,12 @@ var jqgridHandler ={
 
 			            	
 			                $(this).show();
-//			                 $(".node select option").attr('selected', true);
 			                count++;
 			            }
 			        });
 			  });
+			   
+			   //export to excel click function 
 			   $('#test').click(function(){
 					  fnExcelReport();
 				  });
@@ -442,67 +436,56 @@ var jqgridHandler ={
 			
 		},
 		selectCheckBox : function(){
-	
-//	  $('.docCheckbox').change(function() {
+			
+			//check , uncheck functionality of the documents 
 		  $(document).on("change",".docCheckbox",function(e){
 			  console.log(e);
+			  //adding the data to the grid when checked 
 			  if($(this).is(':checked') == true){
-		      		
+		      		//iterating the json data
 		        	$.each(docsJSon2, function(i, obj){
 		        		
 		        		if(obj.documentName == e.currentTarget.nextSibling.innerText){
-		        			deleteGridRow(obj);	        			
+		        			addGridRow(obj);	        			
 
 		        		}
 		        	});
 		        	$.each(docsJSon, function(i, obj){
 		        		if(obj.documentName == e.currentTarget.nextSibling.innerText){
 		        			
-		        			deleteGridRow(obj);	  
+		        			addGridRow(obj);	  
 		        		}
 		        	});
 		        	$.each(docsJSon3, function(i, obj){
 		        		if(obj.documentName == e.currentTarget.nextSibling.innerText){
 		        			
-		        			deleteGridRow(obj);	  
+		        			addGridRow(obj);	  
 		        		}
 		        	});
 		        	
 		        }else{
 		        
-		        
+		        //removing or deleting the data added into grid when checked 
 		        var data = $("#grid").jqGrid('getGridParam', 'data');
-	for (var i = 0; i < data.length; i++) {
+		        for (var i = 0; i < data.length; i++) {
 		
-			if(data[i].Document_Name == e.currentTarget.nextSibling.innerText){
-				 $('#grid').jqGrid('delRowData',data[i].id);
-			}
+		        	if(data[i].Document_Name == e.currentTarget.nextSibling.innerText){
+		        		$('#grid').jqGrid('delRowData',data[i].id);
+		        	}
 	   		
-	    }
-
-		        
-		        	
+		        }
 		        	
 		        }
 	        	});
 	        	
-	        	
-	        	/*alert(JSON.stringify(av));
-	        	$.each(av, function(i, obj){
-	        		
-	        		if(!obj.documentName == e.currentTarget.nextSibling.innerText){
-	        			abc.push(obj);
-	        			jqgridHandler.loadjQGrid(abc);
-	        		}
-	        	});*/
-	        	
 	        },
-exportToGrid : function(){
-	jqgridHandler.loadjQGrid(abc);
+	        exportToGrid : function(){
+	        	jqgridHandler.loadjQGrid(abc);
+	
+	        }
 	
 }
-	
-}
+// export to the excel function 
 function fnExcelReport() {
 
     var tab_text = '<html xmlns:x="urn:schemas-microsoft-com:office:excel">';
@@ -524,7 +507,8 @@ function fnExcelReport() {
     $('#test').attr('download', 'Test file.xlsx');
 
 }
-function deleteGridRow(obj){
+//adding the data to the grid when check box is clicked
+function addGridRow(obj){
 	
 	var p = $('#grid').getGridParam();
     if (p.data){
@@ -534,14 +518,16 @@ function deleteGridRow(obj){
         
     }
 }
-function unloadPopupBox() {	// TO Unload the Popupbox
+//TO Unload the Popupbox
+function unloadPopupBox() {	
 	$('#popup_box').fadeOut("slow");
 	$("#container").css({ // this is just for style		
 		"opacity": "1"  
 	}); 
 }	
 
-function loadPopupBox() {	// To Load the Popupbox
+// To Load the Popupbox
+function loadPopupBox() {
 	$('#popup_box').fadeIn("slow");
 	$("#container").css({ // this is just for style
 		"opacity": "0.3"  
